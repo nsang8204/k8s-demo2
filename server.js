@@ -4,7 +4,9 @@ const redis = require('redis');
 const app = express();
 const PORT = 3000;
 
-const client = redis.createClient();
+const client = redis.createClient({
+    url: 'redis://redis:6379'
+});
 
 client.on('error', (err) => console.error('Redis Client Error', err));
 
