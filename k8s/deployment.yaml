@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: k8s-demo
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: k8s-demo
@@ -17,3 +17,12 @@ spec:
         image: ghcr.io/nsang8204/k8s-demo2:latest
         ports:
         - containerPort: 3000
+
+        volumeMounts:
+        - name: data-volume
+          mountPath: /data
+
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: k8s-demo-pvc
